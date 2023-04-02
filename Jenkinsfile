@@ -5,6 +5,7 @@ pipeline {
         DOCKER_CONTAINER_NAME = "lab_docker_jenkins-container"
         DOCKER_IMAGE_NAME     = "lab_docker_jenkins-image"
         PORT                  = "8085"
+        DOCKERHUB_COMMON_CREDS = credentials('dockerhub')
     }
 
     stages {
@@ -23,6 +24,8 @@ pipeline {
                 dir('Lab_jenkins_docker') { // change directory to Lab_docker_Jenkins
                     echo "Current path is ${pwd()}"
                     sh "docker build -t ${DOCKER_IMAGE_NAME} ."
+                    sh 'docker login -u $DOCKERHUB_COMMON_CREDS_USR -p $DOCKERHUB_COMMON_CREDS_PSW'
+                    sh 'docker image push ipin091786334/lab_docker_jenkins-image'
                 }
             }
         }

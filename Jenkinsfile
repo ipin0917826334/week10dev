@@ -25,7 +25,7 @@ pipeline {
                     sh "docker build -t ${DOCKER_IMAGE_NAME} ."
                     sh 'docker login -u $DOCKERHUB_COMMON_CREDS_USR -p $DOCKERHUB_COMMON_CREDS_PSW'
                     sh 'docker lab_docker_jenkins-image ipin0917826334/lab_docker_jenkins-image'
-                    sh 'docker image push lab_docker_jenkins-image'
+                    sh 'docker image push ipin0917826334/lab_docker_jenkins-image'
             }
         }
 
